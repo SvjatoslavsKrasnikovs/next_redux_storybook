@@ -2,3 +2,13 @@
   max-width: 100%;
   height: auto;
 }
+
+.priceButtonCard {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.buttonContainer {
+  display: block;
+  margin: auto
+}

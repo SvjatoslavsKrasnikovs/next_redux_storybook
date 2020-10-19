@@ -1,5 +1,6 @@
 import React from 'react';
-import './index.module.css';
+import styles from './index.module.css';
+//import cx from 'classnames'
 
 export interface ButtonProps {
   /**
@@ -34,11 +35,22 @@ export const Button: React.FC<ButtonProps> = ({
   label,
   ...props
 }) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  const buttonMode = primary ? styles.storybook_button_primary : styles.storybook_button_secondary;
+  let buttonSize
+  switch(size) {
+    case('large'):
+      buttonSize = styles.storybook_button_large
+      break
+    case('small'):
+      buttonSize = styles.storybook_button_small
+      break
+    default:
+      buttonSize = styles.storybook_button_medium
+  }
   return (
     <button
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      className={[styles.storybook_button, buttonMode, buttonSize].join(' ')}
       style={{ backgroundColor }}
       {...props}
     >

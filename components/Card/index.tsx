@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ProductName from '../UI/ProductName'
-// import Button from '../UI/Button/Button'
+import { Button } from '../UI/Button'
 
 import styles from './index.module.css'
 
@@ -18,8 +18,12 @@ const Card: React.FC<Props> = ({ item }) => {
         }
       />
       <ProductName name={item.name} />
-      <h2>{item.price}</h2>
-      {/* <Button /> */}
+      <div className={styles.priceButtonCard}>
+        <h2>{item.price}</h2>
+        <div className={styles.buttonContainer}>
+          <Button label="Hello" primary></Button>
+        </div>
+      </div>
     </div>
   )
 }
