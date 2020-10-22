@@ -1,9 +1,6 @@
 .outerCard {
   position: relative;
   background: white;
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: none;
   min-width: 100%;
   width: 100%;
   transition: all 1s ease-in-out;

@@ -26,6 +26,7 @@ const Card: React.FC<Props> = ({ item, height }) => {
         url={
           "https://images-na.ssl-images-amazon.com/images/I/71qa-wuTe2L._AC_SL1500_.jpg"
         }
+        activated={activated}
       />
       <ProductInfo item={item} clickEvent={() => expantCard()} activated={activated}/>
     </div>
