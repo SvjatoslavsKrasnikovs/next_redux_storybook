@@ -1,31 +1,35 @@
-import React from 'react'
+import React, { useState } from "react";
 
-import ProductName from '../UI/ProductName'
-import { Button } from '../UI/Button'
+import { ProductInfo } from "../UI/ProductInfo";
+import { ProductImage } from "../UI/ProductImage";
 
-import styles from './index.module.css'
+import styles from "./index.module.css";
 
 interface Props {
-  item: Product
+  item: Product;
+  height: number;
+  width: number;
 }
 
-const Card: React.FC<Props> = ({ item }) => {
+const Card: React.FC<Props> = ({ item, height }) => {
+  const [activated, setActivated] = useState(false);
+
+  const expantCard = () => {
+    setActivated(!activated);
+  };
+
+  const activeStyle = activated ? styles.activated : undefined;
+
   return (
-    <div className={styles.outerCard}>
-      <img
-        src={
-          'https://images-na.ssl-images-amazon.com/images/I/71qa-wuTe2L._AC_SL1500_.jpg'
+    <div className={[styles.outerCard, activeStyle].join(" ")}>
+      <ProductImage
+        url={
+          "https://images-na.ssl-images-amazon.com/images/I/71qa-wuTe2L._AC_SL1500_.jpg"
         }
       />
-      <ProductName name={item.name} />
-      <div className={styles.priceButtonCard}>
-        <h2>{item.price}</h2>
-        <div className={styles.buttonContainer}>
-          <Button label="Hello" primary></Button>
-        </div>
-      </div>
+      <ProductInfo item={item} clickEvent={() => expantCard()} activated={activated}/>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

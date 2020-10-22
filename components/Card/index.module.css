@@ -1,14 +1,22 @@
-.outerCard img{
-  max-width: 100%;
-  height: auto;
-}
-
-.priceButtonCard {
+.outerCard {
+  position: relative;
+  background: white;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-columns: none;
+  min-width: 100%;
+  width: 100%;
+  transition: all 1s ease-in-out;
+  z-index: inherit;
+  left: 0;
 }
 
-.buttonContainer {
-  display: block;
-  margin: auto
+.activated {
+  position: relative;
+  left: -100%;
+  width: 300%;
+  height: 100%;
+  z-index: 1000;
+  /* grid-template-columns: auto auto;
+  grid-template-rows: none; */
 }

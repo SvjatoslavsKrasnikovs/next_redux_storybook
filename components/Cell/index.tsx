@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 
 import Card from '../Card'
 
@@ -9,9 +9,20 @@ interface Props {
 }
 
 const Cell: React.FC<Props> = ({item}) => {
+  const [height, setHeight] = useState<number>(null)
+  const [width, setWidth] = useState<number>(null)
+  const cell = useRef(null)
+
+  useEffect(() => {
+    setHeight(cell.current.clientHeight)
+    setWidth(cell.current.clientWidth)
+  })
+
+  console.log(height)
+
   return (
-    <div className={styles.outerCell}>
-      {item ? <Card item={item}/> : undefined}
+    <div className={item ? styles.outerCell : styles.outerCellEmpty} ref={cell}>
+      {item ? <Card item={item} height={height} width={width}/> : undefined}
     </div>
   )
 }

@@ -16,6 +16,6 @@ interface Product {
   brand: string,
   capacity: number,
   name: string,
-  price: string,
+  price: number,
   product_id: string
 }
