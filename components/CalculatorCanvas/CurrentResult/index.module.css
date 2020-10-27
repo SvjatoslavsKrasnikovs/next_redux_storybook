@@ -1,0 +1,13 @@
+.currentResultWrapper {
+  align-self: center;
+  height: 70%;
+  position: relative;
+}
+
+.CurrentResult {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3em;
+}

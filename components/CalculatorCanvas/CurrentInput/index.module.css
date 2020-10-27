@@ -1,0 +1,7 @@
+.currentInputWrapper {
+  align-self: flex-end
+}
+
+.currentInput {
+  font-size: 1.5em;
+}
