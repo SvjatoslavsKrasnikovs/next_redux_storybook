@@ -1,0 +1,43 @@
+.hasBorder {
+  box-sizing: border-box;
+}
+
+.hasBorder:hover {
+  border: 3px solid orange;
+}
+
+.deactivated {
+  position: relative;
+  left: 0%;
+  background: white;
+  width: 100%;
+  z-index: inherit;
+  transition: width 1s ease-in-out;
+}
+
+.activated {
+  position: relative;
+  left: -100%;
+  width: 300%;
+  z-index: 1000;
+  transition: width 1s ease-in-out;
+}
+
+.smallElement {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: none;
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+
+.smallDeactivated {
+  opacity: 0;
+  pointer-events:none;
+}
+
+.activeElement {
+  display: grid;
+  grid-template-rows: none;
+  grid-template-columns: 1fr 1fr;
+}

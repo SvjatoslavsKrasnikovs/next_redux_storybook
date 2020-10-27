@@ -1,0 +1,52 @@
+.outerCanvasContainer {
+  max-width: 400px;
+  display: block;
+  margin: auto;
+}
+
+.innerCanvasContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: 
+    "results results results results"
+    "clear clear equal plus"
+    "num num num minus"
+    "num num num mult"
+    "num num num divide";
+}
+
+.Number {
+  grid-area: num;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.Results {
+  grid-area: results;
+}
+
+.Clear {
+  grid-area: clear;
+}
+
+.Equal {
+  grid-area: equal;
+}
+
+.Plus {
+  grid-area: plus;
+}
+
+.Minus {
+  grid-area: minus;
+}
+
+.Multiply {
+  grid-area: mult;
+}
+
+.Divide {
+  grid-area: divide;
+}

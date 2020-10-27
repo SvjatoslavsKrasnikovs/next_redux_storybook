@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import Row from '../../components/Row'
+import Row from '../Row'
 
 import styles from './index.module.css'
 

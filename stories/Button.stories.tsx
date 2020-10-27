@@ -2,10 +2,10 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react';
 
-import {Button, ButtonProps} from '../components/UI/Button'
+import {Button, ButtonProps} from '../components/ProductCanvas/UI/Button'
 
 export default {
-  title: 'UI/Button',
+  title: '/ProductCanvas/UI/Button',
   component: Button,
   argTypes: {
     backgroundColor: { control: 'color' },

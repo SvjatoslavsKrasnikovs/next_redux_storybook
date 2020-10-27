@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useProducts } from '../hooks/index'
 import { fetchProduct } from '../store/actions/actions'
 
-import Canvas from '../components/Canvas'
+import Canvas from '../components/ProductCanvas/Canvas'
 
 const Products = () => {
   const products = useProducts()
