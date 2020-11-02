@@ -6,13 +6,12 @@ import { Results } from "../Results";
 import { Operator } from "../Operator";
 import { Number } from "../Number";
 
-type Operators = null | '+' | '-' | '*' | 'clear' | '/' | '='
+type Operators = null | "+" | "-" | "*" | "clear" | "/" | "=";
 
 export const CalculatorCanvas: React.FC = () => {
   const [currentInput, setCurrentInput] = useState<string>("");
   const [result, setResult] = useState<number>(0);
-  const [resultMem, setResultMem] = useState<number>(0);
-  const [operatorPrev, setOperatorPrev] = useState<Operators>(null)
+  const [error, setError] = useState<boolean>(false);
 
   const numberPad = [];
   for (let i = 1; i < 10; i++) {
@@ -23,67 +22,99 @@ export const CalculatorCanvas: React.FC = () => {
     );
   }
 
+  const clearStore = () => {
+    setCurrentInput("");
+    setResult(0);
+  };
+
+  const expressionEval = (input: string) => {
+    // Evaluate if the expression is correct
+    // Expression can not start or end with an algebric operator
+    const numberRegex = new RegExp("^[0-9]$");
+    if (
+      !(numberRegex.test(input[0]) && numberRegex.test(input[input.length - 1]))
+    ) {
+      setError(true);
+      return 0;
+    }
+    // Consequent algebra operations are not accepted, apart from +-
+
+    // Break down into bits and feed to operationEvaluiation(). At shi point, we're almost sure that the expressions are good.
+    // let inputCopy = input;
+    let numbers: string[] = [];
+    let operators: string[] = [];
+    let prevElement: string = "1";
+    let prevCursor = 0;
+
+    for (let i = 0; i < input.length; i++) {
+      if (numberRegex.test(prevElement)) {
+        // Last element was a number, default
+        if (numberRegex.test(input[i])) {
+          // This element is a number, do nothing see the next element.
+        } else {
+          // This element is not a number
+          // This means that previous index is where the number ends
+          numbers.push(input.slice(prevCursor, i-1))
+          operators.push(input.slice(i, i))
+        }
+      } else {
+        // Last element was not a number
+        if (numberRegex.test(input[i])) {
+          // This element is a number
+          // It seems like we only need to place a cursor here
+          prevCursor = i
+        } else {
+          // This element is not a number(Totally unexpected case)
+        }
+      }
+      prevElement = input[i];
+    }
+    console.log(numbers)
+    console.log(operators)
+
+    // Return expected values
+  };
+
+  const operationEvaluation = (
+    operator: Operators,
+    lhs: number,
+    rhs: number
+  ): number => {
+    let result: number = 0;
+    switch (operator) {
+      case "+":
+        result = lhs + rhs;
+        break;
+      case "-":
+        result = lhs - rhs;
+        break;
+      case "/":
+        result = lhs / rhs;
+        break;
+      case "*":
+        result = lhs * rhs;
+        break;
+      default:
+        break;
+    }
+    return result;
+  };
+
   const numberPush = (number) => {
-    setCurrentInput((currentState) => {
+    setCurrentInput((currentState: string) => {
       return currentState.concat(number);
     });
-    console.log(`number pushed ${number}`);
   };
 
   const operatorPush = (operator: Operators) => {
-    if (operator === 'clear') {
-      setCurrentInput('')
-      setResult(0)
-      setOperatorPrev(null)
-      setResultMem(0)
-    }
-    else if (operator === '=') {
-      switch(operatorPrev) {
-        case '+':
-          setResult(resultMem + parseInt(currentInput))
-          setOperatorPrev(null)
-          setCurrentInput('')
-          setResultMem(0)
-          break
-        case '-':
-          setResult(resultMem - parseInt(currentInput))
-          setOperatorPrev(null)
-          setCurrentInput('')
-          setResultMem(0)
-          break
-        case '*':
-          setResult(resultMem * parseInt(currentInput))
-          setOperatorPrev(null)
-          setCurrentInput('')
-          setResultMem(0)
-          break
-        // Implement null check
-        case '/':
-          setResult(resultMem / parseInt(currentInput))
-          setOperatorPrev(null)
-          setCurrentInput('')
-          setResultMem(0)
-          break
-        default:
-          setResult(0)
-          setOperatorPrev(null)
-          setCurrentInput('')
-          setResultMem(0)
-          break
-      }
-
-    }
-    // Algebra Operator 
-    else {
-      if (currentInput.length === 0) {
-        setOperatorPrev(operator)
-        setCurrentInput('')
-        setResultMem(result)
-      } else {
-        setOperatorPrev(operator)
-        setResultMem(parseInt(currentInput))
-        setCurrentInput('')
-      }
+    if (operator === "clear") {
+      clearStore();
+    } else if (operator === "=") {
+      expressionEval(currentInput);
+    } else {
+      setCurrentInput((currentState: string) => {
+        return currentState.concat(operator);
+      });
     }
   };
 
